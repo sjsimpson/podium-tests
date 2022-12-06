@@ -1,0 +1,9 @@
+services:
+  e2e:
+    image: cypress
+    build: ./
+    container_name: cypress
+    command: npx cypress run
+    volumes:
+      - ./cypress:/app/cypress
+      - ./cypress.config.js:/app/cypress.config.js
