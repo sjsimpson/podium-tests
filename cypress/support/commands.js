@@ -33,25 +33,17 @@ Cypress.Commands.add('clearSessionStorage', () => {
   })
 })
 
-Cypress.Commands.add('getIframe', (iframeSelector) => {
-    return cy
-      .get(iframeSelector, { timeout: 2000 })
-      .its('0.contentDocument.body')
-      .should('be.visible')
-      .then(cy.wrap)
-})
-
 Cypress.Commands.add('getWidgetIframe', () => {
   cy.get(IFRAME_SELECTOR)
     .its('0.contentDocument').should('not.be.empty')
     .its('body')
     .as('body')
 
-  return cy.get('@body')
-    .should('be.visible')
-    .should('not.be.empty')
-    .then(cy.wrap)
-    // .find('div#ContactBubble', {timeout:10000})
+  return cy
+    .get("@body")
+    .should("be.visible")
+    .should("not.be.empty")
+    .then(cy.wrap);
 })
 
 Cypress.Commands.add('goToHomepage', () => {
@@ -61,7 +53,3 @@ Cypress.Commands.add('goToHomepage', () => {
 Cypress.Commands.add('openMenu', () => {
   return cy.getWidgetIframe().find('button#podium-website-widget-button').click()
 })
-
-// Cypress.Commands.add('openMenu', () => {
-//   cy.getIframeBody('iframe[data-cy="podium-website-widget-iframe"]').
-// })
